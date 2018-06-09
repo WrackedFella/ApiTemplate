@@ -1,0 +1,27 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "https://localhost/Storefront.Api",
+      "sslPort": 0
+    },
+    "iisExpress": {
+      "applicationUrl": "http://localhost:50473",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "JwtAudience": "https://localhost/Storefront",
+        "JwtKey": "ec9a3791-6e64-44f6-b06d-ef2c4ba30340",
+        "JwtDomain": "https://localhost/Storefront.Api",
+        "JwtIssuer": "https://localhost/Storefront.Api",
+        "ConnStr": "server=.;database=Storefront.dev;Username=Storefront;Password=password;Persist Security Info=True"
+      }
+    }
+  }
+}
