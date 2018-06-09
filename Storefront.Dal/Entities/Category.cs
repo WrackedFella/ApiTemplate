@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace Storefront.Dal.Entities
 {
-  public class Category : EntityBase
-  {
-	public string Name { get; set; }
+	public class Category : EntityBase
+	{
+		public string Name { get; set; }
 
-	public virtual ICollection<Product> Products { get; set; } = new HashSet<Product>();
-  }
+		public virtual ICollection<Product> Products { get; set; } = new HashSet<Product>();
+	}
 }

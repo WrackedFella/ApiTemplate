@@ -5,23 +5,23 @@ using Xunit;
 
 namespace Storefront.UnitTests.Core
 {
-  public class AutoMapperFixture : IDisposable
-  {
-	public AutoMapperFixture()
+	public class AutoMapperFixture : IDisposable
 	{
-	  AutoMapperConfig.RegisterAutoMapperProfiles();
+		public AutoMapperFixture()
+		{
+			AutoMapperConfig.RegisterAutoMapperProfiles();
+		}
+
+		public void Dispose()
+		{
+			Mapper.Reset();
+		}
 	}
 
-	public void Dispose()
+	[CollectionDefinition("AutoMapper")]
+	public class AutoMapperCollection : ICollectionFixture<AutoMapperFixture>
 	{
-	  Mapper.Reset();
+		// Empty, used to attach new ICollectionFixture<> definitions to this collection. i.e. you
+		// can have multiple Fixtures to a Collection. This class lets you do it.
 	}
-  }
-
-  [CollectionDefinition("AutoMapper")]
-  public class AutoMapperCollection : ICollectionFixture<AutoMapperFixture>
-  {
-	// Empty, used to attach new ICollectionFixture<> definitions to this collection. i.e. you can
-	// have multiple Fixtures to a Collection. This class lets you do it.
-  }
 }

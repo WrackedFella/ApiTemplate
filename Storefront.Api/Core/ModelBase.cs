@@ -1,7 +1,9 @@
-﻿namespace Storefront.Api.Core
+﻿using System;
+
+namespace Storefront.Api.Core
 {
-  public class ModelBase
-  {
-	public string Id { get; set; }
-  }
+	public class ModelBase
+	{
+		public Guid Id { get; set; }
+	}
 }

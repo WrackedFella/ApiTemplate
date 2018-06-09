@@ -4,14 +4,13 @@ using Storefront.Dal.Core;
 
 namespace Storefront.Api.AutoMapper.Profiles
 {
-  public class GlobalProfile : Profile
-  {
-	public GlobalProfile()
+	public class GlobalProfile : Profile
 	{
-	  CreateMap<ModelBase, EntityBase>()
-		  .ForMember(dest => dest.Id, opt => opt.Ignore());
-	  CreateMap<EntityBase, ModelBase>()
-		  .ForMember(dest => dest.Id, opt => opt.Ignore());
+		public GlobalProfile()
+		{
+			CreateMap<ModelBase, EntityBase>()
+				.ForMember(dest => dest.Id, opt => opt.Ignore());
+			CreateMap<EntityBase, ModelBase>();
+		}
 	}
-  }
 }

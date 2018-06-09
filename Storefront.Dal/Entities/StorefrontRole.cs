@@ -3,7 +3,7 @@ using System;
 
 namespace Storefront.Dal.Entities
 {
-  public class StorefrontRole : IdentityRole<Guid>
-  {
-  }
+	public class StorefrontRole : IdentityRole<Guid>
+	{
+	}
 }

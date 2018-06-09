@@ -6,10 +6,10 @@ using Storefront.Dal.Entities;
 
 namespace Storefront.Api.ApiControllers
 {
-  public class CategoryController : ControllerBase<Category, CategoryModel>
-  {
-	public CategoryController(BmDbContext context, ILogger logger) : base(context, logger)
+	public class CategoryController : ControllerBase<Category, CategoryModel>
 	{
+		public CategoryController(StorefrontDbContext context) : base(context)
+		{
+		}
 	}
-  }
 }

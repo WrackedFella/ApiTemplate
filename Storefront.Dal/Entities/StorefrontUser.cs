@@ -3,7 +3,7 @@ using System;
 
 namespace Storefront.Dal.Entities
 {
-  public class StorefrontUser : IdentityUser<Guid>
-  {
-  }
+	public class StorefrontUser : IdentityUser<Guid>
+	{
+	}
 }

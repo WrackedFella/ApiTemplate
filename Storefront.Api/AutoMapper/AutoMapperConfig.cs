@@ -3,15 +3,15 @@ using Storefront.Api.AutoMapper.Profiles;
 
 namespace Storefront.Api.AutoMapper
 {
-  public class AutoMapperConfig
-  {
-	public static void RegisterAutoMapperProfiles()
+	public class AutoMapperConfig
 	{
-	  Mapper.Initialize(x =>
-	  {
-		x.AddProfile<GlobalProfile>();
-		x.AddProfile<ProductProfile>();
-	  });
+		public static void RegisterAutoMapperProfiles()
+		{
+			Mapper.Initialize(x =>
+			{
+				x.AddProfile<GlobalProfile>();
+				x.AddProfile<ProductProfile>();
+			});
+		}
 	}
-  }
 }
