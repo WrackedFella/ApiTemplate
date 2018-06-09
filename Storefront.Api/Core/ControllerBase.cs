@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Storefront.Api.Core
 {
-	//[ApiController]
+	[ApiController]
 	[Route("api/[controller]")]
 	public abstract class ControllerBase<TEntity, TModel> : Controller
 		where TEntity : EntityBase
@@ -98,7 +98,7 @@ namespace Storefront.Api.Core
 		}
 	}
 
-	//[ApiController]
+	[ApiController]
 	[Route("api/[controller]")]
 	public abstract class ControllerBase<TEntity, TModel, TListModel> : Controller
 		where TEntity : EntityBase
