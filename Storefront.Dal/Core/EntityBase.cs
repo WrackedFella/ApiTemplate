@@ -13,5 +13,6 @@ namespace Storefront.Dal.Core
 
 		public DateTimeOffset CreatedDate { get; set; }
 		public DateTimeOffset ModifiedDate { get; set; }
+		public bool IsNewRecord => this.Id == Guid.Empty;
 	}
 }
