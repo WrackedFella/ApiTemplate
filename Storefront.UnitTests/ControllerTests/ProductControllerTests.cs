@@ -30,7 +30,7 @@ namespace Storefront.UnitTests.ControllerTests
 		{
 			// Arrange
 			var context = this.BuildContext();
-			var controller = new ProductController(context);
+			var controller = new ProductController(context, null);
 			var model = new ProductModel();
 
 			// Act
@@ -51,7 +51,7 @@ namespace Storefront.UnitTests.ControllerTests
 			var expectedName = "Green Beans";
 			var product = new Product { Name = "Canned Corn", Price = expectedPrice };
 			var context = this.BuildContext(product);
-			var controller = new ProductController(context);
+			var controller = new ProductController(context, null);
 			var patch = new JsonPatchDocument<ProductModel>();
 			patch.Replace(x => x.Name, expectedName);
 
@@ -74,7 +74,7 @@ namespace Storefront.UnitTests.ControllerTests
 			var expectedName = "Green Beans";
 			var product = new Product { Name = "Canned Corn", Price = 1.00m };
 			var context = this.BuildContext(product);
-			var controller = new ProductController(context);
+			var controller = new ProductController(context, null);
 			var model = new ProductModel { Name = expectedName };
 
 			// Act

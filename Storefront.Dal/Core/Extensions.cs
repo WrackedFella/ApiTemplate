@@ -6,14 +6,14 @@ namespace Storefront.Dal.Core
 {
 	public static class Extensions
 	{
-		public static void SetAuditDetails(this EntityBase entity, Guid userId)
+		public static void SetAuditDetails(this EntityBase entity, string username)
 		{
 			if (entity.IsNewRecord)
 			{
-				entity.CreatedById = userId;
+				entity.CreatedByUsername = username;
 				entity.CreatedDate = DateTimeOffset.Now;
 			}
-			entity.ModifiedById = userId;
+			entity.ModifiedByUsername = username;
 			entity.ModifiedDate = DateTimeOffset.Now;
 		}
 	}

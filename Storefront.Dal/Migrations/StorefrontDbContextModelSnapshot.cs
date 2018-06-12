@@ -107,11 +107,11 @@ namespace Storefront.Dal.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("CreatedById");
+                    b.Property<string>("CreatedByUsername");
 
                     b.Property<DateTimeOffset>("CreatedDate");
 
-                    b.Property<Guid>("ModifiedById");
+                    b.Property<string>("ModifiedByUsername");
 
                     b.Property<DateTimeOffset>("ModifiedDate");
 
@@ -129,11 +129,11 @@ namespace Storefront.Dal.Migrations
 
                     b.Property<Guid>("CategoryId");
 
-                    b.Property<Guid>("CreatedById");
+                    b.Property<string>("CreatedByUsername");
 
                     b.Property<DateTimeOffset>("CreatedDate");
 
-                    b.Property<Guid>("ModifiedById");
+                    b.Property<string>("ModifiedByUsername");
 
                     b.Property<DateTimeOffset>("ModifiedDate");
 

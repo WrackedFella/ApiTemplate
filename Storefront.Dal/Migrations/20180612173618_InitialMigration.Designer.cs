@@ -10,8 +10,8 @@ using Storefront.Dal.DbContext;
 namespace Storefront.Dal.Migrations
 {
     [DbContext(typeof(StorefrontDbContext))]
-    [Migration("20180609184955_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20180612173618_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,11 +109,11 @@ namespace Storefront.Dal.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("CreatedById");
+                    b.Property<string>("CreatedByUsername");
 
                     b.Property<DateTimeOffset>("CreatedDate");
 
-                    b.Property<Guid>("ModifiedById");
+                    b.Property<string>("ModifiedByUsername");
 
                     b.Property<DateTimeOffset>("ModifiedDate");
 
@@ -131,11 +131,11 @@ namespace Storefront.Dal.Migrations
 
                     b.Property<Guid>("CategoryId");
 
-                    b.Property<Guid>("CreatedById");
+                    b.Property<string>("CreatedByUsername");
 
                     b.Property<DateTimeOffset>("CreatedDate");
 
-                    b.Property<Guid>("ModifiedById");
+                    b.Property<string>("ModifiedByUsername");
 
                     b.Property<DateTimeOffset>("ModifiedDate");
 

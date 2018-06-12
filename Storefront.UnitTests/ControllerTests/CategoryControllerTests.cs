@@ -29,7 +29,7 @@ namespace Storefront.UnitTests.ControllerTests
 		{
 			// Arrange
 			var context = this.BuildContext();
-			var controller = new CategoryController(context);
+			var controller = new CategoryController(context, null);
 			var model = new CategoryModel();
 
 			// Act

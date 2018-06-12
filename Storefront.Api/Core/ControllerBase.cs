@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +20,13 @@ namespace Storefront.Api.Core
 		where TModel : ModelBase
 	{
 		protected readonly StorefrontDbContext Context;
+		protected readonly string CurrentUsername;
 
 		// ToDo: Implement search using IPredicateBuilder, or Get(params TModel searchParams).
-		protected ControllerBase(StorefrontDbContext context)
+		protected ControllerBase(StorefrontDbContext context, IHttpContextAccessor accessor)
 		{
 			this.Context = context;
+			this.CurrentUsername = accessor == null ? "MockUser" : accessor.HttpContext.User.Identity.Name;
 		}
 
 		[HttpGet]
@@ -49,6 +52,7 @@ namespace Storefront.Api.Core
 		public async Task<ActionResult<CreatedAtRouteResult>> Post([FromBody] TModel model)
 		{
 			var record = Mapper.Map<TEntity>(model);
+			record.SetAuditDetails(CurrentUsername);
 			this.Context.Set<TEntity>().Add(record);
 			await this.Context.SaveChangesAsync();
 
@@ -65,7 +69,7 @@ namespace Storefront.Api.Core
 			}
 
 			Mapper.Map(model, record);
-
+			record.SetAuditDetails(CurrentUsername);
 			this.Context.Set<TEntity>().Update(record);
 			await this.Context.SaveChangesAsync();
 			return AcceptedAtRoute(new { id = record.Id }, model);
@@ -79,7 +83,7 @@ namespace Storefront.Api.Core
 			patch.ApplyTo(mappedRecord, this.ModelState);
 
 			Mapper.Map(mappedRecord, record);
-
+			record.SetAuditDetails(CurrentUsername);
 			return AcceptedAtRoute(new { id = record.Id }, record);
 		}
 
@@ -91,7 +95,7 @@ namespace Storefront.Api.Core
 			{
 				return NotFound();
 			}
-
+			// ToDo: Soft delete
 			this.Context.Set<TEntity>().Remove(record);
 			await this.Context.SaveChangesAsync();
 			return NoContent();
@@ -106,10 +110,13 @@ namespace Storefront.Api.Core
 		where TListModel : ModelBase
 	{
 		protected readonly StorefrontDbContext Context;
+		protected readonly string CurrentUsername;
 
-		protected ControllerBase(StorefrontDbContext context)
+		// ToDo: Implement search using IPredicateBuilder, or Get(params TModel searchParams).
+		protected ControllerBase(StorefrontDbContext context, IHttpContextAccessor accessor)
 		{
 			this.Context = context;
+			this.CurrentUsername = accessor == null ? "MockUser" : accessor.HttpContext.User.Identity.Name;
 		}
 
 		[HttpGet]
@@ -135,6 +142,7 @@ namespace Storefront.Api.Core
 		public async Task<ActionResult<CreatedAtRouteResult>> Create([FromBody] TModel model)
 		{
 			var record = Mapper.Map<TEntity>(model);
+			record.SetAuditDetails(CurrentUsername);
 			this.Context.Set<TEntity>().Add(record);
 			await this.Context.SaveChangesAsync();
 
@@ -151,7 +159,7 @@ namespace Storefront.Api.Core
 			}
 
 			Mapper.Map(model, record);
-
+			record.SetAuditDetails(CurrentUsername);
 			this.Context.Set<TEntity>().Update(record);
 			await this.Context.SaveChangesAsync();
 			return AcceptedAtRoute(new { id = model.Id }, model);
@@ -165,7 +173,7 @@ namespace Storefront.Api.Core
 			patch.ApplyTo(mappedRecord, this.ModelState);
 
 			Mapper.Map(mappedRecord, record);
-
+			record.SetAuditDetails(CurrentUsername);
 			return AcceptedAtRoute(new { id = record.Id }, record);
 		}
 
@@ -178,6 +186,7 @@ namespace Storefront.Api.Core
 				return NotFound();
 			}
 
+			// ToDo: Soft delete
 			this.Context.Set<TEntity>().Remove(record);
 			await this.Context.SaveChangesAsync();
 			return NoContent();
