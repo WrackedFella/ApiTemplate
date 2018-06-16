@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using NLog.Extensions.Logging;
 using Storefront.Api.AutoMapper;
+using Storefront.Api.Core;
 using Storefront.Api.ExceptionHandling;
 using Storefront.Dal.DbContext;
 using Storefront.Dal.Entities;
@@ -140,7 +141,12 @@ namespace Storefront.Api
 			services
 				//.AddMvc()
 				.AddMvc(options => options.Filters.Add(new AuthorizeFilter(policy)))
-				.AddJsonOptions(options => options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ");
+				.AddJsonOptions(options =>
+				{
+					options.SerializerSettings.DateFormatString = "YYYY-MM-DDTHH:mm:ssZ";
+					options.SerializerSettings.Converters.Add(new CustomJsonConverter());
+					options.SerializerSettings.ContractResolver = new CustomContractResolver();
+				});
 		}
 
 		private void ConfigureLogging(IServiceCollection services)
