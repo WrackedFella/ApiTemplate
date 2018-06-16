@@ -55,7 +55,6 @@ namespace Storefront.Api.Core
 			record.SetAuditDetails(CurrentUsername);
 			this.Context.Set<TEntity>().Add(record);
 			await this.Context.SaveChangesAsync();
-
 			return CreatedAtRoute(new { id = record.Id }, record);
 		}
 
@@ -84,6 +83,7 @@ namespace Storefront.Api.Core
 
 			Mapper.Map(mappedRecord, record);
 			record.SetAuditDetails(CurrentUsername);
+			await this.Context.SaveChangesAsync();
 			return AcceptedAtRoute(new { id = record.Id }, record);
 		}
 
@@ -145,7 +145,6 @@ namespace Storefront.Api.Core
 			record.SetAuditDetails(CurrentUsername);
 			this.Context.Set<TEntity>().Add(record);
 			await this.Context.SaveChangesAsync();
-
 			return CreatedAtRoute(new { id = record.Id }, record);
 		}
 
@@ -171,9 +170,9 @@ namespace Storefront.Api.Core
 			var record = await this.Context.Set<TEntity>().FindAsync(id);
 			var mappedRecord = Mapper.Map<TModel>(record);
 			patch.ApplyTo(mappedRecord, this.ModelState);
-
 			Mapper.Map(mappedRecord, record);
 			record.SetAuditDetails(CurrentUsername);
+			await this.Context.SaveChangesAsync();
 			return AcceptedAtRoute(new { id = record.Id }, record);
 		}
 
@@ -185,7 +184,6 @@ namespace Storefront.Api.Core
 			{
 				return NotFound();
 			}
-
 			// ToDo: Soft delete
 			this.Context.Set<TEntity>().Remove(record);
 			await this.Context.SaveChangesAsync();
